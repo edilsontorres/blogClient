@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react'
-import './App.css'
 import axios from 'axios';
 
-function App() {
+export const App = () => {
   
   const axiosInstance = 'http://localhost:5070/api/postagens';
 
@@ -25,5 +24,3 @@ function App() {
     </>
   )
 }
-
-export default App
