@@ -1,24 +1,21 @@
-import axios from "axios";
-import { useEffect } from "react";
-
+import { useEffect, useState } from "react";
+import { PostService } from "../../shared/services/Api/Posts/PostService";
 
 export const Dashboard = () => {
-    const axiosInstance = 'http://localhost:5070/api/postagens';
-    const teste = async() => {
-        await axios.get(axiosInstance)
-        .then(response => {
-          console.log(response.data);
-        }).catch(error => {
-          console.log(error);
-        }); 
-      }
-    
-      useEffect(() =>{
-        teste();
-      });
-    
-    return(
-        <>
-        </>
-    );
+  const[post, setPost] = useState<any>([]);
+
+  useEffect(()=>{
+    PostService.listPost()
+    .then((result) => {
+      setPost(result);
+    });
+  }, []);
+
+
+  return (
+    <>
+      {/* Uma maneira de visualizar(redenrizar) um objeto direto na página */}
+      <pre>{JSON.stringify(post, null, 2)}</pre>
+    </>
+  );
 }
