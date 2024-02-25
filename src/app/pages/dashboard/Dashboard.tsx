@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import { PostService } from "../../shared/services/Api/Posts/PostService";
+import { IPost, PostService } from "../../shared/services/Api/Posts/PostService";
 
 export const Dashboard = () => {
-  const[post, setPost] = useState<any>([]);
+  const[post, setPost] = useState<IPost[]>([]);
 
   useEffect(()=>{
     PostService.listPost()
@@ -14,8 +14,29 @@ export const Dashboard = () => {
 
   return (
     <>
-      {/* Uma maneira de visualizar(redenrizar) um objeto direto na página */}
-      <pre>{JSON.stringify(post, null, 2)}</pre>
+      <h1>Lista de Artigos</h1>
+      <table>
+        <thead>
+          <tr>
+            <td>ID</td>
+            <td>Titulo</td>
+            <td>Conteudo</td>
+            <td>Autor</td>
+            <td>Ação</td>
+          </tr> 
+        </thead>
+        {post.map((post, index) =>
+          <tbody key={index}>
+            <tr>
+              <td><p>{post.id}</p></td>
+              <td><p>{post.title}</p></td>
+              <td><p>{post.content}</p></td>
+              <td><p>{post.author}</p></td>
+            </tr>
+          </tbody>
+        )}
+      </table>
+        
     </>
   );
 }

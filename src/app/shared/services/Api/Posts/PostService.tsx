@@ -1,6 +1,6 @@
 import { DefaultConetion } from "../../ApiConfig"
 
-interface IPost{
+export interface IPost{
     id: number;
     title: string;
     content: string;
@@ -12,20 +12,24 @@ const listPost = async (): Promise<IPost[]> => {
     return data;
 }
 
-const listPostById = () => {
-    
+const listPostById = async (id: number) => {
+    const { data } =  await DefaultConetion().get(`/postagens/${id}`);
+    return data;
 }
 
-const newPost = () => { 
-    
+const newPost = async (newPost: Omit<IPost, 'id'>): Promise<IPost> => { 
+    const { data } = await DefaultConetion().post('/postagens/novapostagem', newPost);
+    return data;
 }
 
-const updatePost = () => {
-    
+const updatePost = async(id: number, postUpdate: IPost): Promise<IPost> => {
+    const { data } = await DefaultConetion().put(`/postagens/editarpostagem/${id}`, postUpdate);
+    return data;
 }
 
-const removePost = () => {
-    
+const removePost = async (id: number): Promise<undefined> => {
+    await DefaultConetion().delete(`/postagen/${id}`);
+    return undefined;
 }
 
 export const PostService = {
@@ -34,5 +38,4 @@ export const PostService = {
     newPost,
     updatePost,
     removePost
-
 }
