@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { IPost, PostService } from "../../shared/services/Api/Posts/PostService";
 import { useNavigate } from "react-router-dom";
-import { Update } from "../main";
 
 export const Dashboard = () => {
   const[post, setPost] = useState<IPost[]>([]);
