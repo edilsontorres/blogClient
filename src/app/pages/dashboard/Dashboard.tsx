@@ -1,8 +1,12 @@
 import { useEffect, useState } from "react";
 import { IPost, PostService } from "../../shared/services/Api/Posts/PostService";
+import { useNavigate } from "react-router-dom";
+import { Update } from "../main";
 
 export const Dashboard = () => {
   const[post, setPost] = useState<IPost[]>([]);
+  const navigator = useNavigate();
+  
 
   useEffect(()=>{
     PostService.listPost()
@@ -11,6 +15,10 @@ export const Dashboard = () => {
     });
   }, []);
 
+  const dadosPost = (post:IPost) => {
+    return navigator(`/postagens`, { state:{post: post} });
+    
+  }
 
   return (
     <>
@@ -18,9 +26,7 @@ export const Dashboard = () => {
       <table>
         <thead>
           <tr>
-            <td>ID</td>
             <td>Titulo</td>
-            <td>Conteudo</td>
             <td>Autor</td>
             <td>Ação</td>
           </tr> 
@@ -28,15 +34,17 @@ export const Dashboard = () => {
         {post.map((post, index) =>
           <tbody key={index}>
             <tr>
-              <td><p>{post.id}</p></td>
               <td><p>{post.title}</p></td>
-              <td><p>{post.content}</p></td>
               <td><p>{post.author}</p></td>
+              <td>
+                <button onClick={()=> dadosPost(post)}>Editar</button>
+                <button>Excluir</button>
+              </td>
             </tr>
           </tbody>
         )}
       </table>
-        
+      
     </>
   );
 }
