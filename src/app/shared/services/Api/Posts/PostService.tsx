@@ -28,7 +28,7 @@ const updatePost = async(id: number, postUpdate: IPost): Promise<IPost> => {
 }
 
 const removePost = async (id: number): Promise<undefined> => {
-    await DefaultConetion().delete(`/postagen/${id}`);
+    await DefaultConetion().delete(`/postagens/${id}`);
     return undefined;
 }
 

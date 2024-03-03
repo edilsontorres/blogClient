@@ -40,7 +40,7 @@ export const Update = () => {
                 <input type="text" defaultValue={dadosPost.title} onChange={(event) => setPostTitle(event.target.value)}/>
 
                 <h3>Conteudo:</h3>
-                <input type="text" defaultValue={dadosPost.content} onChange={(event) => setPostContent(event.target.value)}/>
+                <textarea  defaultValue={dadosPost.content} onChange={(event) => setPostContent(event.target.value)}/>
 
                 <h3>Autor:</h3>
                 <input type="text" defaultValue={dadosPost.author} onChange={(event) => setPostAuthor(event.target.value)}/>

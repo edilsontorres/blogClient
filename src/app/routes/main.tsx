@@ -1,5 +1,5 @@
 import {BrowserRouter, Route, Routes} from "react-router-dom";
-import { Dashboard, Update } from "../pages/main";
+import { Dashboard, NewPost, Update } from "../pages/main";
 
 
 
@@ -9,6 +9,7 @@ export const Rotas = () => {
             <Routes>
                 <Route path="/" element={<Dashboard />} />
                 <Route path="/postagens/" element={<Update />} />
+                <Route path="/novopost" element={<NewPost />} />
             </Routes>
         </BrowserRouter>
     );
