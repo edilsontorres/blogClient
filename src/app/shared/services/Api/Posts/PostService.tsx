@@ -7,6 +7,7 @@ export interface IPost{
     author: string;
 }
 
+
 const listPost = async (): Promise<IPost[]> => {
     const {data} = await DefaultConetion().get('/postagens');
     return data;
@@ -32,10 +33,20 @@ const removePost = async (id: number): Promise<undefined> => {
     return undefined;
 }
 
+const image = async (image:FormData) => {
+    await DefaultConetion().post('/img/newimage', image, {
+        headers: {
+            'Content-Type': 'multipart/form-data'
+        }
+    })
+    return undefined;
+}
+
 export const PostService = {
     listPost,
     listPostById,
     newPost,
     updatePost,
-    removePost
+    removePost,
+    image
 }
