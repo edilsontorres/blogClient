@@ -5,6 +5,7 @@ export interface IPost{
     title: string;
     content: string;
     author: string;
+    img: File;
 }
 
 
@@ -18,8 +19,12 @@ const listPostById = async (id: number) => {
     return data;
 }
 
-const newPost = async (newPost: Omit<IPost, 'id'>): Promise<IPost> => { 
-    const { data } = await DefaultConetion().post('/postagens/novapostagem', newPost);
+const newPost = async (newPost: Omit<IPost, 'id'> ): Promise<IPost> => { 
+    const { data } = await DefaultConetion().post('/postagens/novapostagem', newPost, {
+        'headers': {
+            'Content-Type': 'multipart/form-data'
+        }
+    });
     return data;
 }
 
@@ -33,20 +38,12 @@ const removePost = async (id: number): Promise<undefined> => {
     return undefined;
 }
 
-const image = async (image:FormData) => {
-    await DefaultConetion().post('/img/newimage', image, {
-        headers: {
-            'Content-Type': 'multipart/form-data'
-        }
-    })
-    return undefined;
-}
+
 
 export const PostService = {
     listPost,
     listPostById,
     newPost,
     updatePost,
-    removePost,
-    image
+    removePost
 }
