@@ -3,6 +3,8 @@ import { PostService } from "../../shared/services/Api/Posts/PostService";
 import { useNavigate } from "react-router-dom";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import * as N from "./NewPostStyle";
+
 
 export const NewPost = () => {
     const navigate = useNavigate();
@@ -45,30 +47,43 @@ export const NewPost = () => {
 
     return(
         <>
-            <form onSubmit={stopDefAction}>
-                <h3>Titulo:</h3>
-                <input type="text" onChange={(event) => setPostTitle(event.target.value)} />
+            <N.Container>
+                <N.TitleContainer>
+                    <N.TitleArea>
+                        <h1>Novo Post</h1>
+                    </N.TitleArea>
+                </N.TitleContainer>
+                <N.FormContainer>
+               
+                    <N.BotaoContainer>
+                        <N.Botao type="submit" value={"Salvar"} />
+                    </N.BotaoContainer>
+                    <form onSubmit={stopDefAction}>
+                        <N.InputModelContainer>
+                            <N.InputModel type="text" onChange={(event) => setPostTitle(event.target.value)} placeholder="Titulo"/>
+                        </N.InputModelContainer>
 
-                <h3>Conteudo:</h3>
-                <CKEditor
+                        <N.CkeditorContainer>
+                            <CKEditor
+                                config={{placeholder: "No que você esta pensando hoje?"}}
+                                editor={ClassicEditor}
+                                onReady={editor => {
+                                            
+                                }}
+                                onChange={ckEditorValue}     
+                            />
+                        </N.CkeditorContainer>
+                        <N.InputModelContainer>
+                            <N.InputModel type="text" onChange={(event) => setPostAuthor(event.target.value)} placeholder="Autor"/>
+                        </N.InputModelContainer>                        
 
-                    editor={ClassicEditor}
-                    onReady={editor => {
-
-                    }}
-                    onChange={ckEditorValue}
-                />
-
-                <h3>Autor:</h3>
-                <input type="text" onChange={(event) => setPostAuthor(event.target.value)} />
-
-
-                <h3>Imagens:</h3>
-                <input type="file" name="img" />
-
-                <input type="submit" value={"Enviar"} />
-
-            </form>
+                        <h3>Imagem:</h3>
+                        <input type="file" name="img" />
+                        
+                    </form>
+                </N.FormContainer>  
+            </N.Container>
+                
         </>
     )
 }
