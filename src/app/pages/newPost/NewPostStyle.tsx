@@ -58,7 +58,9 @@ export const InputModel = styled.input`
   &::placeholder{
     font-style: italic;
   }
+  
 `;
+
 
 export const BotaoContainer = styled.div`
   display: flex;
@@ -78,5 +80,23 @@ export const Botao = styled.input`
   cursor: pointer;
   border: none;
 
+`;
+
+export const InputFileModel = styled.div`
+  background-color: #000000;
+  color: #ffffff;
+  display: flex;
+  justify-content: center;
+  border-radius: 50px;
+  padding: 5px 15px 5px 15px;
+  font-size: 15px;
+  font-weight: 600;
+  width: 20%;
+  input{
+    display: none;
+  }
+  label{
+    cursor: pointer;
+  }
 `;
 

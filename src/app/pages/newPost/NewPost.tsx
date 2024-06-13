@@ -76,10 +76,11 @@ export const NewPost = () => {
                         <N.InputModelContainer>
                             <N.InputModel type="text" onChange={(event) => setPostAuthor(event.target.value)} placeholder="Autor"/>
                         </N.InputModelContainer>                        
-
-                        <h3>Imagem:</h3>
-                        <input type="file" name="img" />
                         
+                            <N.InputFileModel>
+                                <label htmlFor="img">Adicionar Mídia</label>
+                                <input type="file" name="img" id="img"/>
+                            </N.InputFileModel>
                     </form>
                 </N.FormContainer>  
             </N.Container>
