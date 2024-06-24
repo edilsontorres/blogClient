@@ -31,12 +31,20 @@ export const NewPost = () => {
             newPost(post);
         }
 
+        const cleaningUpEvent = event.currentTarget.value = null;
+        const post = {
+            title: postTitle,
+            content: postContent,
+            author: postAuthor,
+            img: cleaningUpEvent
+        }
+        newPost(post);
+
     }
     
     const ckEditorValue = (event:any, editor:ClassicEditor) => {
         let data = editor.getData();
-        setPostContent(data);
-        
+        setPostContent(data); 
     }
 
     const newPost = async (post:any) => {
@@ -54,10 +62,6 @@ export const NewPost = () => {
                     </N.TitleArea>
                 </N.TitleContainer>
                 <N.FormContainer>
-               
-                    <N.BotaoContainer>
-                        <N.Botao type="submit" value={"Salvar"} />
-                    </N.BotaoContainer>
                     <form onSubmit={stopDefAction}>
                         <N.InputModelContainer>
                             <N.InputModel type="text" onChange={(event) => setPostTitle(event.target.value)} placeholder="Titulo"/>
@@ -77,10 +81,13 @@ export const NewPost = () => {
                             <N.InputModel type="text" onChange={(event) => setPostAuthor(event.target.value)} placeholder="Autor"/>
                         </N.InputModelContainer>                        
                         
-                            <N.InputFileModel>
-                                <label htmlFor="img">Adicionar Mídia</label>
-                                <input type="file" name="img" id="img"/>
-                            </N.InputFileModel>
+                        <N.InputFileModel>
+                            <label htmlFor="img">Adicionar Mídia</label>
+                            <input type="file" name="img" id="img"/>
+                        </N.InputFileModel>
+                        <N.BotaoContainer>
+                            <N.Botao type="submit" value={"Salvar"} />
+                        </N.BotaoContainer>
                     </form>
                 </N.FormContainer>  
             </N.Container>
