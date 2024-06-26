@@ -12,8 +12,6 @@ export const NewPost = () => {
     const [postContent, setPostContent] = useState('');
     const [postAuthor, setPostAuthor] = useState('');
 
-  
-    
     const stopDefAction = (event:FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         const formData = new FormData(event.currentTarget);
@@ -63,6 +61,9 @@ export const NewPost = () => {
                 </N.TitleContainer>
                 <N.FormContainer>
                     <form onSubmit={stopDefAction}>
+                        <N.BotaoContainer>
+                            <N.Botao type="submit" value={"Salvar"} />
+                        </N.BotaoContainer>
                         <N.InputModelContainer>
                             <N.InputModel type="text" onChange={(event) => setPostTitle(event.target.value)} placeholder="Titulo"/>
                         </N.InputModelContainer>
@@ -85,9 +86,7 @@ export const NewPost = () => {
                             <label htmlFor="img">Adicionar Mídia</label>
                             <input type="file" name="img" id="img"/>
                         </N.InputFileModel>
-                        <N.BotaoContainer>
-                            <N.Botao type="submit" value={"Salvar"} />
-                        </N.BotaoContainer>
+                        
                     </form>
                 </N.FormContainer>  
             </N.Container>

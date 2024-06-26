@@ -2,12 +2,11 @@ import styled from "styled-components";
 
 
 export const Container = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background-color: #DCDCDC;
-    height:100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #DCDCDC;
+  height:100vh;
 
 `;
 
@@ -38,13 +37,15 @@ export const TitleArea = styled.div`
 
 export const CkeditorContainer = styled.div`
   display: flex;
-  height: auto;
+  margin-bottom: 10px;
+
 
 `;
 
 export const InputModelContainer = styled.div`
   display: flex;
   padding: 2px;
+  margin-bottom: 10px;
 `;
 
 export const InputModel = styled.input`
@@ -66,7 +67,7 @@ export const BotaoContainer = styled.div`
   display: flex;
   justify-content: end;
   width: 100%;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 
 `;
 
