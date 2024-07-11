@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { IPost, PostService } from "../../shared/services/Api/Posts/PostService";
+import * as H from "./HomeStyle";
 
 
 
@@ -16,7 +17,15 @@ export const Home = () => {
 
   return (
     <>
-      <h1>Lista de Artigos</h1>
+      <H.HeadContainer>
+        <H.HeadContainerArea>
+          <h1>Div 1 logo e nome do site</h1>
+        </H.HeadContainerArea>
+        <H.HeadContainerArea>
+          <h1>Div 2 acesso as redes socias</h1>
+        </H.HeadContainerArea>
+      </H.HeadContainer>
+      
       <table>
         <thead>
           <tr>
