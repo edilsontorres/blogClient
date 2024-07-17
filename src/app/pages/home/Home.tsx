@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { IPost, PostService } from "../../shared/services/Api/Posts/PostService";
 import * as H from "./HomeStyle";
+import {FaInstagram, FaLinkedin, FaGithub} from "react-icons/fa"
 
 
 
@@ -18,12 +19,25 @@ export const Home = () => {
   return (
     <>
       <H.HeadContainer>
+
         <H.HeadContainerArea>
-          <h1>Div 1 logo e nome do site</h1>
+          <H.HeadContainerIcons>
+            <a href="https://www.google.com" target="_blank"><FaInstagram /></a>
+          </H.HeadContainerIcons>
+          <H.HeadContainerIcons>
+          <a href="https://www.google.com" target="_blank"><FaGithub /></a>
+          </H.HeadContainerIcons>
+          <H.HeadContainerIcons>
+          <a href="https://www.google.com" target="_blank"><FaLinkedin /></a>
+          </H.HeadContainerIcons>
         </H.HeadContainerArea>
+
         <H.HeadContainerArea>
-          <h1>Div 2 acesso as redes socias</h1>
+          <H.HeadContarinerLogo>
+            <h2>Meu blog logo</h2>
+          </H.HeadContarinerLogo>
         </H.HeadContainerArea>
+
       </H.HeadContainer>
       
       <table>
