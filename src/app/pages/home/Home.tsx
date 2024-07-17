@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react";
 import { IPost, PostService } from "../../shared/services/Api/Posts/PostService";
 import * as H from "./HomeStyle";
-import {FaInstagram, FaLinkedin, FaGithub} from "react-icons/fa"
+import {FaInstagram, FaLinkedin, FaGithub} from "react-icons/fa";
+import img1 from "./images/acara.jpg";
+import img2 from "./images/limpavidro.jpg";
+import img3 from "./images/bengal.jpg";
 
 
 
@@ -40,6 +43,33 @@ export const Home = () => {
 
       </H.HeadContainer>
       
+      <H.PostsSectionContainer>
+        <H.PostSectionContainerArea>
+          <H.PostsSectionItem>
+            <H.PostItem>
+              <img src={img1} />
+              <div>Botão ler conteudo</div>
+              <div>Prévia do conteudo</div>
+            </H.PostItem>
+          </H.PostsSectionItem>
+
+          <H.PostsSectionItem>
+              <H.PostItem>
+                <img src={img2} />
+                <div>Botão ler conteudo</div>
+                <div>Prévia do conteudo</div>
+              </H.PostItem>
+          </H.PostsSectionItem>
+
+          <H.PostsSectionItem>
+              <H.PostItem>
+                <img src={img3} />
+                <div>Botão ler conteudo</div>
+                <div>Prévia do conteudo</div>
+              </H.PostItem>
+          </H.PostsSectionItem>
+        </H.PostSectionContainerArea>
+      </H.PostsSectionContainer>
       <table>
         <thead>
           <tr>
