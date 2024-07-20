@@ -3,9 +3,6 @@ import { IPost, PostService } from "../../shared/services/Api/Posts/PostService"
 import * as H from "./HomeStyle";
 import {FaInstagram, FaLinkedin, FaGithub} from "react-icons/fa";
 import img1 from "./images/acara.jpg";
-import img2 from "./images/limpavidro.jpg";
-import img3 from "./images/bengal.jpg";
-
 
 
 export const Home = () => {
@@ -42,62 +39,18 @@ export const Home = () => {
         </H.HeadContainerArea>
 
       </H.HeadContainer>
-      
-      <H.PostsSectionContainer>
-        <H.PostSectionContainerArea>
-          <H.PostsSectionItem>
-            <H.PostItem>
-              <img src={img1} />
-              <div>Botão ler conteudo</div>
-              <div>Prévia do conteudo</div>
-            </H.PostItem>
-          </H.PostsSectionItem>
 
-          <H.PostsSectionItem>
-              <H.PostItem>
-                <img src={img2} />
-                <div>Botão ler conteudo</div>
-                <div>Prévia do conteudo</div>
-              </H.PostItem>
-          </H.PostsSectionItem>
-
-          <H.PostsSectionItem>
-              <H.PostItem>
-                <img src={img3} />
-                <div>Botão ler conteudo</div>
-                <div>Prévia do conteudo</div>
-              </H.PostItem>
-          </H.PostsSectionItem>
-        </H.PostSectionContainerArea>
-      </H.PostsSectionContainer>
-      <table>
-        <thead>
-          <tr>
-            <td>Titulo</td>
-            <td>Conteudo</td>
-            <td>Autor</td>
-          </tr>
-        </thead>
-        {post.map((post, index) =>
-
-          <tbody key={index}>
-            <tr>
-              <td><p>{post.title}</p></td>
-              <td>
-                <div
-                  dangerouslySetInnerHTML={{
-                    __html: (post.content)
-                  }}
-                ></div>
-              </td>
-              <td><p>{post.author}</p></td>
-            </tr>
-          </tbody>
-
+      <H.SectionPostGrid>
+        {post.map((post, index)=>
+          <H.PostGridItem>
+            <img src={img1}/>
+            <H.PostTitleItem>
+              <a href="https://www.google.com" target="_blank">{post.title}</a>
+            </H.PostTitleItem>
+          </H.PostGridItem>
         )}
-      </table>
-
-
+       
+      </H.SectionPostGrid>
     </>
   );
 }

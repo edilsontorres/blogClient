@@ -33,33 +33,34 @@ export const HeadContarinerLogo = styled.div`
     }
 `;
 
-export const PostsSectionContainer =  styled.div`
-    display: flex;
-    width: 100%;
-    height: auto;
-    justify-content: center;
-    align-items: center;
-    padding: 40px 0 0 0;
-`;
-
-export const PostSectionContainerArea = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: center;
+export const SectionPostGrid = styled.div`
+    display: grid;
+    max-width: 1200px;
+    margin: 0 auto;
     grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-    
+    gap: 60px;
+    background-color: red;
+    margin-top: 20px;
+
 `;
 
-export const PostsSectionItem = styled.div`
-    background-color: beige;
-    width: 500px;
-    height: auto;
-`;
-
-export const PostItem = styled.div`
+export const PostGridItem = styled.div`
+    background-color: aqua;
     img{
         width: 100%;
         height: auto;
+        cursor: pointer;
     }
+
+`;
+
+export const PostTitleItem = styled.div`
+    a{
+        text-decoration: none;
+    }
+    a:hover{
+        color: black;
+    }
+    text-align: left;
+    margin-top: 20px;
 `;
