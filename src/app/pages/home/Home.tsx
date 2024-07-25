@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import { IPost, PostService } from "../../shared/services/Api/Posts/PostService";
 import * as H from "./HomeStyle";
 import {FaInstagram, FaLinkedin, FaGithub} from "react-icons/fa";
-import img1 from "./images/acara.jpg";
+import { Thumb } from "./thumb";
+
 
 
 export const Home = () => {
@@ -11,11 +12,13 @@ export const Home = () => {
 
   useEffect(() => {
     PostService.listPost()
-      .then((result) => {
-        setPost(result);
-      });
+    .then((response) => {
+      setPost(response);
+    });
+   
   }, []);
 
+  
   return (
     <>
       <H.HeadContainer>
@@ -34,7 +37,7 @@ export const Home = () => {
 
         <H.HeadContainerArea>
           <H.HeadContarinerLogo>
-            <h2>Meu blog logo</h2>
+            <h2>Logo do blog</h2>
           </H.HeadContarinerLogo>
         </H.HeadContainerArea>
 
@@ -42,15 +45,17 @@ export const Home = () => {
 
       <H.SectionPostGrid>
         {post.map((post, index)=>
-          <H.PostGridItem>
-            <img src={img1}/>
+          <H.PostGridItem key={index}>
+            <Thumb id={post.id}/>
             <H.PostTitleItem>
-              <a href="https://www.google.com" target="_blank">{post.title}</a>
+              <h1><a href="https://www.google.com" target="_blank">{post.title}</a></h1>
             </H.PostTitleItem>
           </H.PostGridItem>
+          
+          
         )}
-       
       </H.SectionPostGrid>
+    
     </>
   );
 }

@@ -16,7 +16,7 @@ const listPost = async (): Promise<IPost[]> => {
 
 const listPostById = async (id: number) => {
     const { data } =  await DefaultConetion().get(`/postagens/${id}`);
-    return data;
+    return data.path;
 }
 
 const newPost = async (newPost: Omit<IPost, 'id'> ): Promise<IPost> => { 

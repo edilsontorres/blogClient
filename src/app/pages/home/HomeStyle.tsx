@@ -38,14 +38,12 @@ export const SectionPostGrid = styled.div`
     max-width: 1200px;
     margin: 0 auto;
     grid-template-columns: repeat(3, 1fr);
-    gap: 60px;
-    background-color: red;
+    gap: 45px;
     margin-top: 20px;
 
 `;
 
 export const PostGridItem = styled.div`
-    background-color: aqua;
     img{
         width: 100%;
         height: auto;
@@ -57,10 +55,18 @@ export const PostGridItem = styled.div`
 export const PostTitleItem = styled.div`
     a{
         text-decoration: none;
+        color: #2C3333;
     }
     a:hover{
         color: black;
     }
+    h1{
+        font-family: Poppins;
+        font-weight: 600;
+        
+    }
     text-align: left;
-    margin-top: 20px;
+    margin-top: 10px;
+    
+    
 `;
