@@ -45,12 +45,16 @@ export const Home = () => {
 
       <H.SectionPostGrid>
         {post.map((post, index)=>
-          <H.PostGridItem key={index}>
-            <Thumb id={post.id}/>
+          <div id="PostGridArea" key={index}>
+            <H.PostGridItemArea>
+              <H.ThumbHome>
+                <Thumb id={post.id}/>
+              </H.ThumbHome>
+            </H.PostGridItemArea>
             <H.PostTitleItem>
               <h1><a href="https://www.google.com" target="_blank">{post.title}</a></h1>
             </H.PostTitleItem>
-          </H.PostGridItem>
+          </div>
           
           
         )}

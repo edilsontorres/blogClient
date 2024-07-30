@@ -43,12 +43,10 @@ export const SectionPostGrid = styled.div`
 
 `;
 
-export const PostGridItem = styled.div`
-    img{
-        width: 100%;
-        height: auto;
-        cursor: pointer;
-    }
+export const PostGridItemArea = styled.div`
+    display: flex;
+    flex-direction: column;
+    max-height: 600px;
 
 `;
 
@@ -66,7 +64,16 @@ export const PostTitleItem = styled.div`
         
     }
     text-align: left;
-    margin-top: 10px;
     
     
+`;
+
+export const ThumbHome = styled.div`
+    height: 100%;
+    img{
+        width: 100%;
+        height: 100%;
+        cursor: pointer;
+    }
+
 `;
