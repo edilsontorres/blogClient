@@ -1,11 +1,11 @@
 import { DefaultConetion } from "../../ApiConfig"
 
 export interface IPost{
-    id: number;
-    title: string;
-    content: string;
-    author: string;
-    img: File;
+    id: number
+    title: string
+    content: string
+    author: string
+    img: File
 }
 
 
