@@ -3,6 +3,7 @@ import { IPost, PostService } from "../../shared/services/Api/Posts/PostService"
 import * as H from "./HomeStyle";
 import {FaInstagram, FaLinkedin, FaGithub} from "react-icons/fa";
 import { Thumb } from "./thumb";
+import { Footer } from "../../shared/components/footer/Footer";
 
 
 
@@ -52,13 +53,13 @@ export const Home = () => {
               </H.ThumbHome>
             </H.PostGridItemArea>
             <H.PostTitleItem>
-              <h1><a href="https://www.google.com" target="_blank">{post.title}</a></h1>
+              <h2><a href="https://www.google.com" target="_blank">{post.title}</a></h2>
             </H.PostTitleItem>
           </div>
-          
-          
         )}
       </H.SectionPostGrid>
+
+      <Footer />
     
     </>
   );
