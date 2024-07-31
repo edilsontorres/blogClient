@@ -58,10 +58,9 @@ export const PostTitleItem = styled.div`
     a:hover{
         color: black;
     }
-    h1{
-        font-family: Poppins;
+    h2{
+        font-family: Roboto;
         font-weight: 600;
-        
     }
     text-align: left;
     
