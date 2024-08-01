@@ -6,6 +6,8 @@ export interface IPost{
     content: string
     author: string
     img: File
+    createdAt: Date
+    lastDateUpdate: Date
 }
 
 

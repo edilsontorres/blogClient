@@ -55,6 +55,9 @@ export const Home = () => {
             <H.PostTitleItem>
               <h2><a href="https://www.google.com" target="_blank">{post.title}</a></h2>
             </H.PostTitleItem>
+            <div>
+              {post.createdAt.toString()}
+            </div>
           </div>
         )}
       </H.SectionPostGrid>
