@@ -4,6 +4,7 @@ import * as H from "./HomeStyle";
 import {FaInstagram, FaLinkedin, FaGithub} from "react-icons/fa";
 import { Thumb } from "./thumb";
 import { Footer } from "../../shared/components/footer/Footer";
+import { DataPost } from "../../shared/components/data/dataPost";
 
 
 
@@ -55,9 +56,7 @@ export const Home = () => {
             <H.PostTitleItem>
               <h2><a href="https://www.google.com" target="_blank">{post.title}</a></h2>
             </H.PostTitleItem>
-            <div>
-              {post.createdAt.toString()}
-            </div>
+            <DataPost data={post.createdAt} />
           </div>
         )}
       </H.SectionPostGrid>
