@@ -6,10 +6,9 @@ export interface IPost{
     content: string
     author: string
     img: File
-    createdAt: Date
-    lastDateUpdate: Date
+    createdAt: string
+    lastDateUpdate: string
 }
-
 
 const listPost = async (): Promise<IPost[]> => {
     const {data} = await DefaultConetion().get('/postagens');
