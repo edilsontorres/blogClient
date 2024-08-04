@@ -14,7 +14,7 @@ export const Update = () => {
         id: dadosPost.id,
         title: postTitle,
         content: postContent,
-        author: postAuthor
+        author: postAuthor,
     }
     
     const stopDefAction = (event:React.FormEvent<HTMLFormElement>) => {
@@ -47,6 +47,7 @@ export const Update = () => {
 
                 <input type="submit"/>
             </form>
+
         </> 
     )
 }

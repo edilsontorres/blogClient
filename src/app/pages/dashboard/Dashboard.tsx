@@ -19,6 +19,10 @@ export const Dashboard = () => {
     
   }
 
+  const home = () => {
+    navigate('/')
+  }
+
   const novoPost = () => {
     navigate('/novopost');
   }
@@ -37,6 +41,7 @@ export const Dashboard = () => {
     <>
       <h1>Lista de Artigos</h1>
       <button onClick={novoPost}>Novo Post</button>
+      <button onClick={home}>Home</button>
       <table>
         <thead>
           <tr>

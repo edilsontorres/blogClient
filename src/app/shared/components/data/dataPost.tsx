@@ -6,8 +6,12 @@ export const DataPost = (props: {data: string}) => {
     const data = FormatData(props.data);
 
     return(
-        <>
-            <D.Style>{data}</D.Style>
-        </>
+        
+        <D.Style>
+            <a href="https://google.com" target="_blank">
+                {data}
+            </a>
+        </D.Style>
+        
     )
 }
