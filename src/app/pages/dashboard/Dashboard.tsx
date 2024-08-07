@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { IPost, PostService } from "../../shared/services/Api/Posts/PostService";
 import { useNavigate } from "react-router-dom";
+import * as D from "./DashboardStyle";
+import { Footer } from "../../shared/components/footer/Footer";
 
 export const Dashboard = () => {
   const[post, setPost] = useState<IPost[]>([]);
@@ -39,7 +41,12 @@ export const Dashboard = () => {
 
   return (
     <>
-      <h1>Lista de Artigos</h1>
+
+      <D.bodyContainer>
+        ...
+      </D.bodyContainer>
+
+      {/* <h1>Lista de Artigos</h1>
       <button onClick={novoPost}>Novo Post</button>
       <button onClick={home}>Home</button>
       <table>
@@ -62,8 +69,10 @@ export const Dashboard = () => {
             </tr>
           </tbody>
         )}
-      </table>
-      
+      </table> */}
+      <Footer />
     </>
+
+   
   );
 }
