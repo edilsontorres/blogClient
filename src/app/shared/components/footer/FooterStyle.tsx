@@ -5,6 +5,7 @@ export const CopyrightContainer = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
+    position: sticky;
     height: 50px;
     width: 100%;
     margin-top: 50px;
