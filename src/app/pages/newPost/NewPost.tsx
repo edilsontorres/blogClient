@@ -83,7 +83,7 @@ export const NewPost = () => {
                         </N.InputModelContainer>                        
                         
                         <N.InputFileModel>
-                            <label htmlFor="img">Adicionar Mídia</label>
+                            <label htmlFor="img">Adicionar Thumb</label>
                             <input type="file" name="img" id="img"/>
                         </N.InputFileModel>
                         
