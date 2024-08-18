@@ -1,46 +1,5 @@
 import styled from "styled-components";
 
-
-export const paletaCores = styled.div`
-    .um{
-        background-color: #5886FF;
-    }
-    .dois{
-        background-color: #76C6AE;
-    }
-    .tres{
-        background-color: #4494C0;
-    }
-    .quatro{
-        background-color: #F7931B;
-    }
-    .cinco{
-        background-color: #28A745;
-    }
-    .seis{
-        background-color: #0F1A34;
-    }
-    .sete{
-        background-color: #F47F60;
-    }
-    .oito{
-        background-color: #302D43;
-    }
-    .nove{
-        background-color: #F9788E;
-    }
-    .dez{
-        background-color: #77C454;
-    }
-    .onze{
-        background-color: #373063;
-    }
-    .doze{
-        background-color: #F9F9F9;
-    }
-
-`;
-
 export const dashboardHeader = styled.div`
     display: flex;
     height: 50px;

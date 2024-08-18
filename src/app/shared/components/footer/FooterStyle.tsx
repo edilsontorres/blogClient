@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const CopyrightContainer = styled.div`
-    background-color: black;
+    background-color: #0F1A34;
     display: flex;
     align-items: center;
     justify-content: center;
