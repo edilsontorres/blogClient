@@ -13,33 +13,22 @@ export const NewPost = () => {
     const [postTitle, setPostTitle] = useState('');
     const [postContent, setPostContent] = useState('');
     const [postAuthor, setPostAuthor] = useState('');
+    const [img, setImg] = useState<any>();
+    
+    const imgResult = (img:File) => {
+        setImg(img);
+        
+    }
 
     const stopDefAction = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        const formData = new FormData(event.currentTarget);
-        const file = formData.get('img') as File;
-        if (file && file.size > 0) {
-            formData.append("img", file.name);
-            formData.append("img", file);
-
-            const post = {
-                title: postTitle,
-                content: postContent,
-                author: postAuthor,
-                img: file
-            }
-            newPost(post);
-        }
-
-        const cleaningUpEvent = event.currentTarget.value = null;
         const post = {
             title: postTitle,
             content: postContent,
             author: postAuthor,
-            img: cleaningUpEvent
+            img: img
         }
         newPost(post);
-
     }
 
     const ckEditorValue = (event: any, editor: ClassicEditor) => {
@@ -91,7 +80,7 @@ export const NewPost = () => {
 
                         <N.thumbContainer>
                             <h2>Thumb do post</h2>
-                            <UploadImg />
+                            <UploadImg img={imgResult}/>     
                         </N.thumbContainer>
                         <hr />
                         <N.buttonArea>
