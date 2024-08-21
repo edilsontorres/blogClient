@@ -1,9 +1,9 @@
-import { useCallback, useState } from 'react';
+import { FormEvent, useCallback, useState } from 'react';
 import * as U from './UploadImgStyle';
 import { useDropzone } from 'react-dropzone';
 import { FaCloudUploadAlt, FaTimes } from 'react-icons/fa';
 
-export const UploadImg = () => {
+export const UploadImg = (props: {img:(img:File) => void}) => {
 
     const [file, setFile] = useState<File | null>(null);
 
@@ -16,6 +16,18 @@ export const UploadImg = () => {
     const removeFile = useCallback(() => {
         setFile(null);
     }, [file])
+
+    const teste = () => {
+        const formData = new FormData();
+        if (file && file.size > 0) {
+            formData.append("img", file.name);
+            formData.append("img", file);
+            const imgUpload = file;
+            props.img(imgUpload)
+        }
+    }
+    teste();
+
 
     const dropzone = useDropzone({
         onDrop,
@@ -32,7 +44,7 @@ export const UploadImg = () => {
 
         <U.Container {...dropzone.getRootProps()} className={` ${dropzone.isDragActive ? 'boderActive' : null}`}>
 
-            <label htmlFor='dropzone-file'>
+            <label htmlFor='img'>
                 <div className='alignItens'>
                     <FaCloudUploadAlt className={`${dropzone.isDragActive ? 'svgActive' : null}`} />
                     {dropzone.isDragActive ?
@@ -56,11 +68,10 @@ export const UploadImg = () => {
     );
 }
 
-export const HasFile = (props: { file: File, remove: () => void }) => {
+export const HasFile = (props: { file: File, remove: () => void}) => {
+    
     const imgFile = props.file.text;
-
     return (
-        <form>
             <U.Container>
                 <U.thumb>
                     <img src={`${imgFile}`} />
@@ -69,6 +80,5 @@ export const HasFile = (props: { file: File, remove: () => void }) => {
                     </button>
                 </U.thumb>
             </U.Container>
-        </form>
     );
 }
