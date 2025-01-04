@@ -1,5 +1,5 @@
 import { FormatData } from "../../services/Data/FormatData"
-import * as D from '../data/dataPostStyle';
+import * as D from './DataPostStyle';
 
 export const DataPost = (props: {data: string}) => {
 

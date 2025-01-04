@@ -13,11 +13,11 @@ export const NewPost = () => {
     const [postTitle, setPostTitle] = useState('');
     const [postContent, setPostContent] = useState('');
     const [postAuthor, setPostAuthor] = useState('');
-    const [img, setImg] = useState<any>();
-    
-    const imgResult = (img:File) => {
-        setImg(img);
-        
+    const [imgFile, setImgFile] = useState<File>();
+
+    const imgResult = (img: File) => {
+        setImgFile(img);
+
     }
 
     const stopDefAction = (event: FormEvent<HTMLFormElement>) => {
@@ -26,13 +26,13 @@ export const NewPost = () => {
             title: postTitle,
             content: postContent,
             author: postAuthor,
-            img: img
+            img: imgFile
         }
         newPost(post);
     }
 
     const ckEditorValue = (event: any, editor: ClassicEditor) => {
-        let data = editor.getData();
+        const data = editor.getData();
         setPostContent(data);
     }
 
@@ -40,6 +40,10 @@ export const NewPost = () => {
         await PostService.newPost(post);
         alert("Post criado com sucesso!");
         return navigate('/');
+    }
+
+    const dashboard = () => {
+        navigate('/dashboard');
     }
 
     return (
@@ -80,12 +84,12 @@ export const NewPost = () => {
 
                         <N.thumbContainer>
                             <h2>Thumb do post</h2>
-                            <UploadImg img={imgResult}/>     
+                            <UploadImg img={imgResult} />
                         </N.thumbContainer>
                         <hr />
                         <N.buttonArea>
                             <N.buttonContainer>
-                                <button className="cancel">
+                                <button onClick={dashboard} className="cancel">
                                     Cancelar
                                 </button>
                                 <button className="publish">
@@ -97,45 +101,6 @@ export const NewPost = () => {
                 </form>
             </N.container>
             <Footer />
-
-            {/* <N.Container>
-                <N.TitleContainer>
-                    <N.TitleArea>
-                        <h1>Novo Post</h1>
-                    </N.TitleArea>
-                </N.TitleContainer>
-                <N.FormContainer>
-                    <form onSubmit={stopDefAction}>
-                        <N.BotaoContainer>
-                            <N.Botao type="submit" value={"Salvar"} />
-                        </N.BotaoContainer>
-                        <N.InputModelContainer>
-                            <N.InputModel type="text" onChange={(event) => setPostTitle(event.target.value)} placeholder="Titulo" />
-                        </N.InputModelContainer>
-
-                        <N.CkeditorContainer>
-                            <CKEditor
-                                config={{ placeholder: "No que você esta pensando hoje?" }}
-                                editor={ClassicEditor}
-                                onReady={editor => {
-
-                                }}
-                                onChange={ckEditorValue}
-                            />
-                        </N.CkeditorContainer>
-                        <N.InputModelContainer>
-                            <N.InputModel type="text" onChange={(event) => setPostAuthor(event.target.value)} placeholder="Autor" />
-                        </N.InputModelContainer>
-
-                        <N.InputFileModel>
-                            <label htmlFor="img">Adicionar Thumb</label>
-                            <input type="file" name="img" id="img" />
-                        </N.InputFileModel>
-
-                    </form>
-                </N.FormContainer>
-            </N.Container> */}
-
         </>
     )
 }

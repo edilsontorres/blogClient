@@ -14,8 +14,8 @@ export const Dashboard = () => {
 
   useEffect(() => {
     PostService.listPost()
-      .then((result) => {
-        setPost(result);
+      .then((data) => {
+        setPost(data.posts);
       });
   }, []);
 

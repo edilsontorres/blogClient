@@ -16,29 +16,36 @@ export const Update = () => {
     const [imgFile, setImgFile] = useState<File>();
 
     const imgResult = (img: File) => {
-        setImgFile(img);
+        setImgFile(img);    
     }
-   
-    const dados:IPost = {
+
+
+    const dados: IPost = {
         id: dadosPost.id,
         title: postTitle,
         content: postContent,
         author: postAuthor,
-        img: imgFile!
+        img: imgFile,
+        createdAt: dadosPost.createdAt,
+        lastDateUpdate: dadosPost.lastDateUpdate
     }
+    
 
-    const stopDefAction = (event:React.FormEvent<HTMLFormElement>) => {
+    const stopDefAction = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         update(dadosPost.id, dados);
     }
 
+
+
     const ckEditorValue = (event: any, editor: ClassicEditor) => {
+        event.preventDefault();
         const data = editor.getData();
         setPostContent(data);
     }
 
-    const update = (id: number, dados:IPost) => {
-        if(id != null){
+    const update = (id: number, dados: IPost) => {
+        if (id != null) {
             PostService.updatePost(id, dados);
             return navigate('/');
         } else {
@@ -49,8 +56,8 @@ export const Update = () => {
     const dashboard = () => {
         navigate('/dashboard');
     }
-    
-    return(
+
+    return (
         <>
             <U.container>
                 <U.containerTitleArea>

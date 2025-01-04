@@ -1,26 +1,27 @@
 import { DefaultConetion } from "../../ApiConfig"
 
-export interface IPost{
+export interface IPost {
     id: number
     title: string
     content: string
     author: string
-    img: File
+    img: File | undefined
     createdAt: string
     lastDateUpdate: string
+
 }
 
-const listPost = async (): Promise<IPost[]> => {
-    const {data} = await DefaultConetion().get('/postagens');
+const listPost = async (): Promise<any> => {
+    const { data } = await DefaultConetion().get('/postagens');
     return data;
 }
 
 const listPostById = async (id: number) => {
-    const { data } =  await DefaultConetion().get(`/postagens/${id}`);
+    const { data } = await DefaultConetion().get(`/postagens/${id}`);
     return data.path;
 }
 
-const newPost = async (newPost: Omit<IPost, 'id'> ): Promise<IPost> => { 
+const newPost = async (newPost: Omit<IPost, 'id'>): Promise<IPost> => {
     const { data } = await DefaultConetion().post('/postagens/novapostagem', newPost, {
         'headers': {
             'Content-Type': 'multipart/form-data'
@@ -29,8 +30,12 @@ const newPost = async (newPost: Omit<IPost, 'id'> ): Promise<IPost> => {
     return data;
 }
 
-const updatePost = async(id: number, postUpdate: IPost): Promise<IPost> => {
-    const { data } = await DefaultConetion().put(`/postagens/editarpostagem/${id}`, postUpdate);
+const updatePost = async (id: number, postUpdate: IPost): Promise<IPost> => {
+    const { data } = await DefaultConetion().put(`/postagens/editarpostagem/${id}`, postUpdate, {
+        'headers': {
+            'Content-Type': 'multipart/form-data'
+        }
+    });
     return data;
 }
 

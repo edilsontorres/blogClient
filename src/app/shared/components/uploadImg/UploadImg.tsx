@@ -1,23 +1,23 @@
-import { FormEvent, useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import * as U from './UploadImgStyle';
 import { useDropzone } from 'react-dropzone';
 import { FaCloudUploadAlt, FaTimes } from 'react-icons/fa';
 
-export const UploadImg = (props: {img:(img:File) => void}) => {
+export const UploadImg = (props: { img: (img: File) => void }) => {
 
-    const [file, setFile] = useState<File | null>(null);
+    const [file, setFile] = useState<File | null>();
 
-    const onDrop = useCallback((img: File[]) => {
+    const onDrop = (img: File[]) => {
         setFile(Object.assign(img[0], {
             text: URL.createObjectURL(img[0])
         }));
-    }, [])
+    };
 
-    const removeFile = useCallback(() => {
+    const removeFile = () => {
         setFile(null);
-    }, [file])
+    };
 
-    const teste = () => {
+    const formatDataFile = () => {
         const formData = new FormData();
         if (file && file.size > 0) {
             formData.append("img", file.name);
@@ -26,7 +26,7 @@ export const UploadImg = (props: {img:(img:File) => void}) => {
             props.img(imgUpload)
         }
     }
-    teste();
+    formatDataFile();
 
 
     const dropzone = useDropzone({
@@ -43,7 +43,6 @@ export const UploadImg = (props: {img:(img:File) => void}) => {
     return (
 
         <U.Container {...dropzone.getRootProps()} className={` ${dropzone.isDragActive ? 'boderActive' : null}`}>
-
             <label htmlFor='img'>
                 <div className='alignItens'>
                     <FaCloudUploadAlt className={`${dropzone.isDragActive ? 'svgActive' : null}`} />
@@ -63,22 +62,21 @@ export const UploadImg = (props: {img:(img:File) => void}) => {
                 </div>
             </label>
             <input {...dropzone.getInputProps()} hidden />
-
         </U.Container>
     );
 }
 
-export const HasFile = (props: { file: File, remove: () => void}) => {
-    
+export const HasFile = (props: { file: File, remove: () => void }) => {
+
     const imgFile = props.file.text;
     return (
-            <U.Container>
-                <U.thumb>
-                    <img src={`${imgFile}`} />
-                    <button onClick={props.remove}>
-                        <FaTimes />
-                    </button>
-                </U.thumb>
-            </U.Container>
+        <U.Container>
+            <U.thumb>
+                <img src={`${imgFile}`} />
+                <button onClick={props.remove}>
+                    <FaTimes />
+                </button>
+            </U.thumb>
+        </U.Container>
     );
 }

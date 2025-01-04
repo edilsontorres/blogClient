@@ -4,7 +4,7 @@ import * as H from "./HomeStyle";
 import {FaInstagram, FaLinkedin, FaGithub} from "react-icons/fa";
 import { Thumb } from "./thumb";
 import { Footer } from "../../shared/components/footer/Footer";
-import { DataPost } from "../../shared/components/data/dataPost";
+import { DataPost } from "../../shared/components/data/DataPost";
 
 
 
@@ -14,12 +14,13 @@ export const Home = () => {
 
   useEffect(() => {
     PostService.listPost()
-    .then((response) => {
-      setPost(response);
+    .then((data) =>{
+      setPost(data.posts);
     });
-   
+
   }, []);
 
+ 
   
   return (
     <>
