@@ -4,7 +4,7 @@ export const FormatData = (data: string) => {
     const coverData = new Date(getDate);
     const dataFormat = Intl.DateTimeFormat('pt-BR', {
         day: 'numeric',
-        month: 'long',
+        month: 'numeric',
         year: 'numeric'
     }).format(coverData);
 

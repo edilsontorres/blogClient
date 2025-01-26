@@ -79,6 +79,7 @@ export const contentPostContainer = styled.div`
   width: 80%;
   margin: 0 auto;
   padding: 10px 0;
+  display: block;
   h2{
     font-family: 'Roboto';
     font-weight: 400;
@@ -95,11 +96,8 @@ export const contentPostContainer = styled.div`
     outline: none;
     font-family: 'Roboto';
   }
-  .ck-editor__editable_inline{
-    min-height: 400px;
-    
-  }
 `
+
 
 export const thumbContainer = styled.div`
   display: flex;

@@ -11,22 +11,35 @@ export interface IPost {
 
 }
 
-const listPost = async (): Promise<any> => {
+export interface Image {
+    link: string;
+}
+
+const listPost = async (): Promise<IPost[]> => {
     const { data } = await DefaultConetion().get('/postagens');
     return data;
 }
 
 const listPostById = async (id: number) => {
-    const { data } = await DefaultConetion().get(`/postagens/${id}`);
-    return data.path;
+    const { data } = await DefaultConetion().get(`/postagens/postagemby/${id}`);
+    return data;
 }
 
-const newPost = async (newPost: Omit<IPost, 'id'>): Promise<IPost> => {
-    const { data } = await DefaultConetion().post('/postagens/novapostagem', newPost, {
+const newPost = async (newPost: Omit<IPost, 'id'>) => {
+    await DefaultConetion().post('/postagens/novapostagem', newPost, {
         'headers': {
             'Content-Type': 'multipart/form-data'
         }
     });
+
+}
+
+const UploadImgEditor = async () => {
+    await DefaultConetion().post('/postagens/editor');
+}
+
+const getThumb = async (id:number): Promise<Image> => {
+    const { data } = await DefaultConetion().get(`http://localhost:5070/api/postagens/foto/${id}`);
     return data;
 }
 
@@ -51,5 +64,7 @@ export const PostService = {
     listPostById,
     newPost,
     updatePost,
-    removePost
+    removePost,
+    UploadImgEditor,
+    getThumb
 }

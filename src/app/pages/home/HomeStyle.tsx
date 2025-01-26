@@ -67,7 +67,7 @@ export const PostTitleItem = styled.div`
     }
     text-align: left;
     
-    
+    cursor: pointer;
 `;
 
 export const ThumbHome = styled.div`

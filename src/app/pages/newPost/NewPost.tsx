@@ -1,12 +1,13 @@
 import { useState, FormEvent } from "react";
 import { PostService } from "../../shared/services/Api/Posts/PostService";
 import { useNavigate } from "react-router-dom";
-import { CKEditor } from "@ckeditor/ckeditor5-react";
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import * as N from "./NewPostStyle";
 import { Footer } from "../../shared/components/footer/Footer";
 import { UploadImg } from "../../shared/components/uploadImg/UploadImg";
-
+import FroalaEditor from "react-froala-wysiwyg";
+import 'froala-editor/css/froala_style.min.css';
+import 'froala-editor/css/froala_editor.pkgd.min.css';
+import 'froala-editor/js/plugins/image.min.js';
 
 export const NewPost = () => {
     const navigate = useNavigate();
@@ -15,9 +16,9 @@ export const NewPost = () => {
     const [postAuthor, setPostAuthor] = useState('');
     const [imgFile, setImgFile] = useState<File>();
 
+
     const imgResult = (img: File) => {
         setImgFile(img);
-
     }
 
     const stopDefAction = (event: FormEvent<HTMLFormElement>) => {
@@ -28,18 +29,23 @@ export const NewPost = () => {
             author: postAuthor,
             img: imgFile
         }
+
+        if(post.title == null || post.content == null || post.author == null || post.img == null){
+            alert("Erro ao criar post, todos os campos são obrigatórios");
+        }
         newPost(post);
     }
 
-    const ckEditorValue = (event: any, editor: ClassicEditor) => {
-        const data = editor.getData();
+    const froalaEditorValue = (data: any) => {
         setPostContent(data);
+        console.log(data);
     }
 
     const newPost = async (post: any) => {
+        if(post){
+
+        }
         await PostService.newPost(post);
-        alert("Post criado com sucesso!");
-        return navigate('/');
     }
 
     const dashboard = () => {
@@ -58,32 +64,39 @@ export const NewPost = () => {
                     <N.mainContainerArea>
                         <N.containerTextArea>
                             <N.titlePostContainer>
-                                <h2>Título</h2>
+                                <h2>Título*</h2>
                                 <input type="text" onChange={(event) => setPostTitle(event.target.value)} />
                             </N.titlePostContainer>
                         </N.containerTextArea>
 
                         <N.containerContentArea>
                             <N.contentPostContainer>
-                                <h2>Post</h2>
-                                <CKEditor
-                                    editor={ClassicEditor}
-                                    onReady={editor => {
-                                    }}
-                                    onChange={ckEditorValue}
+                                <h2>Post*</h2>
+                                <FroalaEditor
+                                    config={{
+                                        heightMin: 300,
+                                        heightAuto: true,
+                                        heightMax: 500,
+                                        placeholderText: 'Qual assunto de hoje?',
+                                        imageUpload: true,
+                                        imageUploadURL: `http://localhost:5070/api/postagens/editor`,
+                                        imageAllowedTypes: ['jpeg', 'jpg', 'png', 'gif']
+                                    }
+                                    }
+                                    onModelChange={froalaEditorValue}
                                 />
                             </N.contentPostContainer>
                         </N.containerContentArea>
 
                         <N.containerTextArea>
                             <N.titlePostContainer>
-                                <h2>Autor</h2>
+                                <h2>Autor*</h2>
                                 <input type="text" onChange={(event) => setPostAuthor(event.target.value)} />
                             </N.titlePostContainer>
                         </N.containerTextArea>
 
                         <N.thumbContainer>
-                            <h2>Thumb do post</h2>
+                            <h2>Thumb do post*</h2>
                             <UploadImg img={imgResult} />
                         </N.thumbContainer>
                         <hr />

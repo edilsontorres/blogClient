@@ -1,5 +1,5 @@
 import {BrowserRouter, Route, Routes} from "react-router-dom";
-import { Dashboard, Home, NewPost, Update } from "../pages/main";
+import { Dashboard, Home, NewPost, Update, ReadingPage } from "../pages/main";
 
 
 
@@ -9,8 +9,9 @@ export const Rotas = () => {
             <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/dashboard" element={<Dashboard />} />
-                <Route path="/postagens/" element={<Update />} />
+                <Route path="/postagens/:id" element={<Update />} />
                 <Route path="/novopost" element={<NewPost />} />
+                <Route path="/titulo-post/:id" element={< ReadingPage />} />
             </Routes>
         </BrowserRouter>
     );

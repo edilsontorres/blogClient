@@ -1,9 +1,21 @@
-export const Thumb = (props: {id: number}) => {
-    const img = `http://localhost:5070/api/postagens/foto/${props.id}`;
+import { useEffect, useState } from "react";
+import { Image, PostService } from "../../shared/services/Api/Posts/PostService";
 
-    return(
+export const Thumb = (props: { id: number }) => {
+    const [data, setData] = useState<Image | null>(null);
+
+    useEffect(() => {
+        PostService.getThumb(props.id)
+            .then((res) => {
+                setData(res);
+            });
+    }, [])
+
+    return (
         <>
-            <img src={img} />
+
+            {data ? (<img src={data.link} />) : (<p>Carregando...</p>)}
+
         </>
     )
 }

@@ -8,9 +8,7 @@ export const DataPost = (props: {data: string}) => {
     return(
         
         <D.Style>
-            <a href="https://google.com" target="_blank">
-                {data}
-            </a>
+            {data}
         </D.Style>
         
     )

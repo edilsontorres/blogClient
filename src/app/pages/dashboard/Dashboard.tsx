@@ -8,6 +8,7 @@ import { FaPen, FaTrashAlt, FaPlusCircle } from "react-icons/fa";
 import avatar from "../../img/avatar.png"
 import { Thumb } from "../home/thumb";
 
+
 export const Dashboard = () => {
   const [post, setPost] = useState<IPost[]>([]);
   const navigate = useNavigate();
@@ -15,12 +16,12 @@ export const Dashboard = () => {
   useEffect(() => {
     PostService.listPost()
       .then((data) => {
-        setPost(data.posts);
+        setPost(data);
       });
   }, []);
 
-  const dadosPost = (post: IPost) => {
-    return navigate(`/postagens`, { state: { post: post } });
+  const dadosPost = (id:number) => {
+    return navigate(`/postagens/${id}`);
 
   }
 
@@ -75,7 +76,7 @@ export const Dashboard = () => {
               </D.tilePost>
               <D.actionPost>
                 <D.svgArea>
-                  <FaPen onClick={() => dadosPost(post)} />
+                  <FaPen onClick={() => dadosPost(post.id)} />
                 </D.svgArea>
                 <D.svgArea>
                   <FaTrashAlt onClick={() => deletePost(post.id)} />

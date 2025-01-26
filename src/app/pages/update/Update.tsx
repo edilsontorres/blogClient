@@ -1,53 +1,81 @@
-import { useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom"
+import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom"
 import { IPost, PostService } from "../../shared/services/Api/Posts/PostService";
 import * as U from "./UpdateStyle";
 import { Footer } from "../../shared/components/footer/Footer";
 import { UploadImg } from "../../shared/components/uploadImg/UploadImg";
-import { CKEditor } from "@ckeditor/ckeditor5-react";
-import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+import FroalaEditor from "react-froala-wysiwyg";
+import 'froala-editor/css/froala_style.min.css';
+import 'froala-editor/css/froala_editor.pkgd.min.css';
+import 'froala-editor/js/plugins/image.min.js';
+
 
 export const Update = () => {
-    const dadosPost = useLocation().state.post;
     const navigate = useNavigate();
-    const [postTitle, setPostTitle] = useState(dadosPost.title);
-    const [postContent, setPostContent] = useState(dadosPost.content);
-    const [postAuthor, setPostAuthor] = useState(dadosPost.author);
+    const { id } = useParams();
+    const idParam = Number(id);
+    const [postTitle, setPostTitle] = useState<string>('');
+    const [postContent, setPostContent] = useState<string>('');
+    const [postAuthor, setPostAuthor] = useState<string>('');
+    const [create, setCreate] = useState<string>('');
     const [imgFile, setImgFile] = useState<File>();
+    const [post, setPost] = useState<IPost>();
+    const [loading, setLoading] = useState<boolean>(true);
 
-    const imgResult = (img: File) => {
-        setImgFile(img);    
+    useEffect(() => {
+        PostService.listPostById(idParam)
+            .then((res) => {
+                setPost(res);
+                setPostTitle(res.title || "");
+                setPostContent(res.content || "");
+                setPostAuthor(res.author || "");
+                setCreate(res.createdAt);
+                setLoading(false);
+            })
+            .catch((error) => {
+                console.error("Erro ao carregar post:", error);
+                setLoading(false);
+            });
+    }, [idParam]);
+
+    if (loading) {
+        <div>Carregando dados...</div>
     }
 
+    const setData = () => {
+        const dataNow = new Date();
+        const formatData = dataNow.toISOString();
+        return formatData;
+    }
+
+    const imgResult = (img: File) => {
+        setImgFile(img);
+    }
+
+    const froalaEditorValue = (data: string) => {
+        setPostContent(data);
+    }
 
     const dados: IPost = {
-        id: dadosPost.id,
+        id: idParam,
         title: postTitle,
         content: postContent,
         author: postAuthor,
         img: imgFile,
-        createdAt: dadosPost.createdAt,
-        lastDateUpdate: dadosPost.lastDateUpdate
+        createdAt: create,
+        lastDateUpdate: setData()
     }
-    
 
     const stopDefAction = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        update(dadosPost.id, dados);
-    }
-
-
-
-    const ckEditorValue = (event: any, editor: ClassicEditor) => {
-        event.preventDefault();
-        const data = editor.getData();
-        setPostContent(data);
+        update(idParam, dados);
     }
 
     const update = (id: number, dados: IPost) => {
         if (id != null) {
             PostService.updatePost(id, dados);
-            return navigate('/');
+            alert("Post criado com sucesso!");
+            return navigate('/dashboard');
         } else {
             console.log("Deu azia");
         }
@@ -70,20 +98,26 @@ export const Update = () => {
                         <U.containerTextArea>
                             <U.titlePostContainer>
                                 <h2>Título</h2>
-                                <input type="text" defaultValue={dadosPost.title} onChange={(event) => setPostTitle(event.target.value)} />
+                                <input type="text" defaultValue={postTitle} onChange={(event) => setPostTitle(event.target.value)} />
                             </U.titlePostContainer>
                         </U.containerTextArea>
 
                         <U.containerContentArea>
                             <U.contentPostContainer>
                                 <h2>Post</h2>
-                                <CKEditor
-                                    editor={ClassicEditor}
-                                    data={dadosPost.content}
-                                    onReady={editor => {
-                                        
-                                    }}
-                                    onChange={ckEditorValue}
+                                <FroalaEditor
+                                    onModelChange={froalaEditorValue}
+                                    model={postContent}
+                                    config={{
+                                        heightMin: 300,
+                                        heightAuto: true,
+                                        heightMax: 500,
+                                        imageUpload: true,
+                                        imageUploadURL: `http://localhost:5070/api/postagens/editor`,
+                                        imageAllowedTypes: ['jpeg', 'jpg', 'png', 'gif']
+                                    }
+                                    }
+
                                 />
                             </U.contentPostContainer>
                         </U.containerContentArea>
@@ -91,7 +125,7 @@ export const Update = () => {
                         <U.containerTextArea>
                             <U.titlePostContainer>
                                 <h2>Autor</h2>
-                                <input type="text" defaultValue={dadosPost.author} onChange={(event) => setPostAuthor(event.target.value)} />
+                                <input type="text" defaultValue={postAuthor} onChange={(event) => setPostAuthor(event.target.value)} />
                             </U.titlePostContainer>
                         </U.containerTextArea>
 
