@@ -6,7 +6,7 @@ export const Rotas = () => {
         <BrowserRouter>
             <Routes>
                 <Route path="/" element={<Home />} />
-                <Route path="/titulo-post/:id" element={< ReadingPage />} />
+                <Route path="/:slug" element={< ReadingPage />} />
             </Routes>
         </BrowserRouter>
     );

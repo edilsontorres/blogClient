@@ -11,8 +11,7 @@ import 'froala-editor/js/plugins/image.min.js';
 
 export const Update = () => {
     const navigate = useNavigate();
-    const { id } = useParams();
-    const idParam = Number(id);
+    const { slug } = useParams();
     const [postTitle, setPostTitle] = useState<string>('');
     const [postContent, setPostContent] = useState<string>('');
     const [postAuthor, setPostAuthor] = useState<string>('');

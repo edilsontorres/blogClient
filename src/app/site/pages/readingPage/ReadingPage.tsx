@@ -9,14 +9,12 @@ import { DataPost } from "../../components/data/DataPost";
 import { Header } from "../../components/header/Header";
 
 export const ReadingPage = () => {
-  const navigate = useNavigate();
-  const { id } = useParams();
-  const idParam = Number(id);
+  const { slug } = useParams();
   const [post, setPost] = useState<IPost>();
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    PostService.listPostById(idParam)
+    PostService.listPostById(slug!)
       .then((data) => {
         setPost(data);
         setLoading(false);

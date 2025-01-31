@@ -21,8 +21,8 @@ export const Home = () => {
 
   }, []);
 
-  const dadosPost = (id:number) => {
-    return navigate(`/titulo-post/${id}`);
+  const dadosPost = (slug:string) => {
+    return navigate(`/${slug}`);
 
   }
 
@@ -38,12 +38,12 @@ export const Home = () => {
         {post.map((post, index)=>
           <div id="PostGridArea" key={index}>
             <H.PostGridItemArea>
-              <H.ThumbHome onClick={() => dadosPost(post.id)}>
+              <H.ThumbHome onClick={() => dadosPost(post.slug)}>
                 <Thumb id={post.id}/>
               </H.ThumbHome>
             </H.PostGridItemArea>
             <DataPost data={post.createdAt} />
-            <H.PostTitleItem onClick={() => dadosPost(post.id)}>
+            <H.PostTitleItem onClick={() => dadosPost(post.slug)}>
               <h2>{post.title}</h2>
             </H.PostTitleItem>
           </div>
