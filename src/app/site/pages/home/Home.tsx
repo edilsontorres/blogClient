@@ -22,7 +22,7 @@ export const Home = () => {
   }, []);
 
   const dadosPost = (slug:string) => {
-    return navigate(`/${slug}`);
+    return navigate(`post/${slug}`);
 
   }
 

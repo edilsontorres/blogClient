@@ -41,9 +41,6 @@ export const NewPost = () => {
     }
 
     const newPost = async (post: any) => {
-        if(post){
-
-        }
         await PostService.newPost(post);
     }
 

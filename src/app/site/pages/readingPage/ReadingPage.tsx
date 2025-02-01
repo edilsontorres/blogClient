@@ -4,7 +4,6 @@ import { Thumb } from "../../../shared/services/Thumb/thumb";
 import * as R from "./ReadingPageStyle";
 import { useParams } from "react-router-dom";
 import { Footer } from "../../components/footer/Footer";
-import { useNavigate } from "react-router-dom";
 import { DataPost } from "../../components/data/DataPost";
 import { Header } from "../../components/header/Header";
 
@@ -22,7 +21,7 @@ export const ReadingPage = () => {
   }, []);
 
   if (loading) {
-    return <div>Carregando...</div>;
+    return <div>Achei...</div>;
   }
 
   return (

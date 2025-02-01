@@ -17,7 +17,7 @@ export interface Image {
 }
 
 const listPost = async (): Promise<IPost[]> => {
-    const { data } = await DefaultConetion().get('/posts');
+    const { data } = await DefaultConetion().get('/posts/list');
     return data;
 }
 
@@ -44,7 +44,7 @@ const getThumb = async (id:number): Promise<Image> => {
     return data;
 }
 
-const updatePost = async (id: number, postUpdate: IPost): Promise<IPost> => {
+const updatePost = async (id: number, postUpdate:IPost): Promise<IPost> => {
     const { data } = await DefaultConetion().put(`/posts/editarpostagem/${id}`, postUpdate, {
         'headers': {
             'Content-Type': 'multipart/form-data'

@@ -21,7 +21,7 @@ export const Update = () => {
     const [loading, setLoading] = useState<boolean>(true);
 
     useEffect(() => {
-        PostService.listPostById(idParam)
+        PostService.listPostById(slug!)
             .then((res) => {
                 setPost(res);
                 setPostTitle(res.title || "");
@@ -32,9 +32,9 @@ export const Update = () => {
             })
             .catch((error) => {
                 console.error("Erro ao carregar post:", error);
-                setLoading(false);
+                setLoading(true);
             });
-    }, [idParam]);
+    }, [slug]);
 
     if (loading) {
         <div>Carregando dados...</div>
@@ -54,23 +54,25 @@ export const Update = () => {
         setPostContent(data);
     }
 
-    const dados: IPost = {
-        id: idParam,
-        title: postTitle,
-        content: postContent,
-        author: postAuthor,
-        img: imgFile,
-        createdAt: create,
-        lastDateUpdate: setData()
-    }
-
     const stopDefAction = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        update(idParam, dados);
+        const finalSlug =  `${postTitle}-${post?.slug}`;
+        const dados: IPost = {
+            id: post!.id,
+            title: postTitle,
+            content: postContent,
+            author: postAuthor,
+            img: imgFile,
+            createdAt: create,
+            slug: finalSlug,
+            lastDateUpdate: setData()
+        }
+
+        update(post!.id, dados);
     }
 
     const update = (id: number, dados: IPost) => {
-        if (id != null) {
+        if (post?.id != null) {
             PostService.updatePost(id, dados);
             alert("Post criado com sucesso!");
             return navigate('/dashboard');

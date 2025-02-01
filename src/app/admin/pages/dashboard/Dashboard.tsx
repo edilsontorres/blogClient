@@ -19,8 +19,8 @@ export const Dashboard = () => {
       });
   }, []);
 
-  const dadosPost = (id:number) => {
-    return navigate(`/postagens/${id}`);
+  const dadosPost = (slug:string) => {
+    return navigate(`/postagens/${slug}`);
 
   }
 
@@ -75,7 +75,7 @@ export const Dashboard = () => {
               </D.tilePost>
               <D.actionPost>
                 <D.svgArea>
-                  <FaPen onClick={() => dadosPost(post.id)} />
+                  <FaPen onClick={() => dadosPost(post.slug)} />
                 </D.svgArea>
                 <D.svgArea>
                   <FaTrashAlt onClick={() => deletePost(post.id)} />
