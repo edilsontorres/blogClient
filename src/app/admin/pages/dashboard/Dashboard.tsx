@@ -1,24 +1,39 @@
 import { useEffect, useState } from "react";
 import { IPost, PostService } from "../../../shared/services/Api/Posts/PostService";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import * as D from "./DashboardStyle";
 import { FormatData } from "../../../shared/services/Data/FormatData";
 import { FaPen, FaTrashAlt, FaPlusCircle } from "react-icons/fa";
 import avatar from "../../../../assets/avatar.png"
 import { Thumb } from "../../../shared/services/Thumb/thumb";
+import { Pagination } from "../../../shared/pagination/Pagination";
 
 
 export const Dashboard = () => {
   const [post, setPost] = useState<IPost[]>([]);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const page = parseInt(searchParams.get("page")|| "1", 10);
+  const [totalPages, setTotalPages] = useState<number>(1);
   const navigate = useNavigate();
 
   useEffect(() => {
-    PostService.listPost()
-      .then((data) => {
-        setPost(data);
-      });
-  }, []);
+    const url = page === 1;
 
+    if (url) {
+      PostService.listPost()
+        .then((data) => {
+          setPost(data.data);
+          setTotalPages(data.totalPages);
+        })
+    } else {
+      PostService.listPostPagination(page)
+        .then((data) => {
+          setPost(data.data)
+          setTotalPages(data.totalPages);
+        });
+    }
+  }, [page]);
+  
   const dadosPost = (slug:string) => {
     return navigate(`/postagens/${slug}`);
 
@@ -35,6 +50,10 @@ export const Dashboard = () => {
       return window.location.reload();
     }
   }
+
+  const handlePageChange = (page: number) => {
+    setSearchParams({ page: String(page) }); // Atualiza a URL ao mudar de página
+  };
 
   return (
     <>
@@ -87,6 +106,7 @@ export const Dashboard = () => {
 
         </D.dashboardContainer>
       </D.mainDashboard>
+      <Pagination currentPage={page} totalPages={totalPages} onPageChange={handlePageChange}/>
     </>
   );
 }
