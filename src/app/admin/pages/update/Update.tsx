@@ -7,6 +7,12 @@ import FroalaEditor from "react-froala-wysiwyg";
 import 'froala-editor/css/froala_style.min.css';
 import 'froala-editor/css/froala_editor.pkgd.min.css';
 import 'froala-editor/js/plugins/image.min.js';
+import 'froala-editor/js/plugins/font_size.min.js';
+import 'froala-editor/js/plugins/link.min.js';
+import 'froala-editor/js/plugins/paragraph_format.min.js';
+import 'froala-editor/js/plugins/paragraph_style.min.js';
+import 'froala-editor/js/plugins/align.min.js';
+
 
 
 export const Update = () => {
@@ -111,9 +117,9 @@ export const Update = () => {
                                     config={{
                                         heightMin: 300,
                                         heightAuto: true,
-                                        heightMax: 500,
+                                        heightMax: 900,
                                         imageUpload: true,
-                                        imageUploadURL: `http://localhost:5070/api/postagens/editor`,
+                                        imageUploadURL: `http://localhost:5070/api/posts/editor`,
                                         imageAllowedTypes: ['jpeg', 'jpg', 'png', 'gif']
                                     }
                                     }
