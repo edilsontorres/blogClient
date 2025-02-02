@@ -27,6 +27,7 @@ export const SectionPostGrid = styled.div`
     min-height: calc(100vh - 50px); /* Leva em consideração a altura do cabeçalho e do rodapé */
     padding-bottom: 40px; /* Leva em consideração a altura do rodapé */
     overflow: auto; /* Permite a rolagem do conteúdo caso exceda o tamanho da tela */
+    margin-top: 50px;
 
 `;
 
