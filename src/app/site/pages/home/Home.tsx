@@ -1,45 +1,59 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { IPost, PostService } from "../../../shared/services/Api/Posts/PostService";
 import * as H from "./HomeStyle";
 import { Thumb } from "../../../shared/services/Thumb/thumb";
 import { Footer } from "../../components/footer/Footer";
 import { DataPost } from "../../components/data/DataPost";
 import { Header } from "../../components/header/Header";
+import { Pagination } from "../../../shared/pagination/Pagination";
 
 
 
 export const Home = () => {
   const navigate = useNavigate();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const page = parseInt(searchParams.get("page")|| "1", 10);
   const [post, setPost] = useState<IPost[]>([]);
-
+  const [totalPages, setTotalPages] = useState<number>(1);
+  
+ 
   useEffect(() => {
-    PostService.listPost()
-    .then((data) =>{
-      setPost(data);
-    });
+    const url = page === 1;
+    if (url) {
+      PostService.listPost()
+        .then((data) => {
+          setTotalPages(data.totalPages);
+          setPost(data.data);
+        })
+    } else {
+      PostService.listPostPagination(page)
+        .then((data) => {
+          setTotalPages(data.totalPages);
+          setPost(data.data)
+        });
+    }
+  }, [page]);
 
-  }, []);
-
-  const dadosPost = (slug:string) => {
+  const dadosPost = (slug: string) => {
     return navigate(`post/${slug}`);
 
   }
 
+  const handlePageChange = (page: number) => {
+    setSearchParams({ page: String(page) }); // Atualiza a URL ao mudar de página
+  };
+
   return (
     <>
-    <Header />
-
-    <H.LastsPost>
-      <h1>Posts mais recentes</h1>
-    </H.LastsPost>
+      <Header />
 
       <H.SectionPostGrid>
-        {post.map((post, index)=>
-          <div id="PostGridArea" key={index}>
+        {post.map((post) => (
+          <div id="PostGridArea" key={post.id}>
             <H.PostGridItemArea>
               <H.ThumbHome onClick={() => dadosPost(post.slug)}>
-                <Thumb id={post.id}/>
+                <Thumb id={post.id} />
               </H.ThumbHome>
             </H.PostGridItemArea>
             <DataPost data={post.createdAt} />
@@ -47,11 +61,11 @@ export const Home = () => {
               <h2>{post.title}</h2>
             </H.PostTitleItem>
           </div>
-        )}
+        ))}
       </H.SectionPostGrid>
-
+      <Pagination currentPage={page} totalPages={totalPages} onPageChange={handlePageChange}/>
       <Footer />
-    
+
     </>
   );
 }
